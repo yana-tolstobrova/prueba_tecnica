@@ -14,7 +14,7 @@
                 <p><strong>Color:</strong> {{ dog.color }}</p>
               </div>
               <q-btn label="Editar" color="blue-10" />
-              <q-btn label="Eliminar" color="red-10" />
+              <q-btn label="Eliminar" color="red-10" @click="deleteDog(dog)" />
             </div>
           </div>
         </div>
@@ -90,6 +90,15 @@ export default {
         })
         .catch(error => {
           console.error('Error creating dog:', error);
+        });
+    },
+    deleteDog(dog) {
+      axios.delete(`http://localhost:8000/api/dogs/${dog.id}`)
+        .then(response => {
+          this.dogs = this.dogs.filter(d => d.id !== dog.id);
+        })
+        .catch(error => {
+          console.error('Error deleting dog:', error);
         });
     }
   },

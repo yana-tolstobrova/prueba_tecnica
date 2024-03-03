@@ -24,31 +24,6 @@ class DogController extends Controller
         return response()->json($dogs);
     }
 
-    /*public function store(Request $request)
-    {
-        $data = $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            'breed' => 'required',
-            'size' => 'required',
-            'color' => 'required',
-        ]);
-
-        try {
-            $dog = Dog::create($request->all());
-            return response()->json([
-                'success' => true,
-                'message' => 'Dog created successfully',
-                'dog' => $dog,
-            ], 201);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to create dog',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }*/
-
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -59,7 +34,6 @@ class DogController extends Controller
         ]);
 
         try {
-            // Upload photo to Cloudinary
             $imageFile = $request->file('photo');
             $uploadedFile = $imageFile->getRealPath();
         
@@ -68,7 +42,6 @@ class DogController extends Controller
         
             $imageUrl = $cloudinaryUpload['secure_url'];
 
-            // Create Dog model with Cloudinary URL
             $data['photo'] = $imageUrl;
             $dog = Dog::create($data);
             
@@ -99,10 +72,44 @@ class DogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dog $dog)
-    {
-        //
+    public function edit(Request $request, Dog $dog)
+{
+    try {
+        $data = $request->validate([
+            'breed' => 'required',
+            'size' => 'required',
+            'color' => 'required',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $imageFile = $request->file('photo');
+            $uploadedFile = $imageFile->getRealPath();
+        
+            $uploadApi = new UploadApi();
+            $cloudinaryUpload = $uploadApi->upload($uploadedFile);
+        
+            $imageUrl = $cloudinaryUpload['secure_url'];
+        
+            $data['photo'] = $imageUrl;
+        }
+
+        $dog->update($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Dog updated successfully',
+            'dog' => $dog,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to update dog',
+            'error' => $e->getMessage(),
+        ], 500);
     }
+}
+
+    
 
     /**
      * Update the specified resource in storage.
@@ -117,6 +124,20 @@ class DogController extends Controller
      */
     public function destroy(Dog $dog)
     {
-        //
+        try {
+            $dog->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Dog deleted successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete dog',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
+

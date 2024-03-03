@@ -43,13 +43,14 @@ class DogController extends Controller
             $imageUrl = $cloudinaryUpload['secure_url'];
 
             $data['photo'] = $imageUrl;
+            
             $dog = Dog::create($data);
             
             return response()->json([
                 'success' => true,
                 'message' => 'Dog created successfully',
                 'dog' => $dog,
-            ], 201);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -59,69 +60,63 @@ class DogController extends Controller
         }
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Dog $dog)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request, Dog $dog)
-{
-    try {
-        $data = $request->validate([
-            'breed' => 'required',
-            'size' => 'required',
-            'color' => 'required',
-        ]);
-
-        if ($request->hasFile('photo')) {
-            $imageFile = $request->file('photo');
-            $uploadedFile = $imageFile->getRealPath();
-        
-            $uploadApi = new UploadApi();
-            $cloudinaryUpload = $uploadApi->upload($uploadedFile);
-        
-            $imageUrl = $cloudinaryUpload['secure_url'];
-        
-            $data['photo'] = $imageUrl;
+        try {
+            return response()->json([
+                'success' => true,
+                'dog' => $dog,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch dog',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        $dog->update($data);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Dog updated successfully',
-            'dog' => $dog,
-        ], 200);
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Failed to update dog',
-            'error' => $e->getMessage(),
-        ], 500);
     }
-}
 
-    
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Dog $dog)
     {
-        //
+        try {
+            $data = $request->validate([
+                'photo' => $request->hasFile('photo') ? 'image|mimes:jpeg,png,jpg,svg|max:2048' : 'required',
+                'breed' => 'required',
+                'size' => 'required',
+                'color' => 'required',
+            ]);
+
+            if ($request->hasFile('photo')) {
+                $imageFile = $request->file('photo');
+                $uploadedFile = $imageFile->getRealPath();
+            
+                $uploadApi = new UploadApi();
+                $cloudinaryUpload = $uploadApi->upload($uploadedFile);
+            
+                $imageUrl = $cloudinaryUpload['secure_url'];
+            
+                $data['photo'] = $imageUrl;
+            }
+            else{
+                $data['photo'] = $request->input('photo');
+            }
+
+            $dog->update($data); 
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Dog updated successfully',
+                'dog' => $dog,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update dog',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Dog $dog)
     {
         try {

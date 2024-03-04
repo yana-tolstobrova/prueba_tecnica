@@ -49,21 +49,20 @@ export default defineComponent({
   <q-page padding style="width: 80%; margin: 0 auto;">
     <ContentWrapper>
         <div v-if="dog">
-            <div class="flex justify-between items-center">
-                <h4>{{ dog.breed }}</h4>
-                <div>
-                <q-btn round color="primary" icon="edit" @click="navigateToEdit" class="q-mr-md"></q-btn>
-                <q-btn round color="negative" icon="delete" @click="deleteDog"></q-btn>
-                </div>
-            </div>
-            <div class="flex justify-between">
-                <img :src="dog.photo" alt="Dog Photo" style="width: 25em; height: 25em; object-fit: cover;">
-                <div style="width: 50%">
+            <div class="flex justify-between items-start">
+                <img :src="dog.photo" alt="Dog Photo" style="width: 25em; height: 25em; object-fit: cover; margin-top:3em">
+                <div style="width: 50%; margin-top: 3em; padding-left: 1em">
+                    <p class="text-h4">{{ dog.breed }}</p>
                     <p><strong>Size:</strong> {{ dog.size }}</p>
                     <p><strong>Color:</strong> {{ dog.color }}</p>
+                    <p><strong>Description:</strong> {{ dog.description }}</p>
                 </div>
+                <div>
+                    <q-btn round color="primary" icon="edit" @click="navigateToEdit" class="q-mr-md"></q-btn>
+                    <q-btn round color="negative" icon="delete" @click="deleteDog"></q-btn>
                 </div>
             </div>
+        </div>
             <div v-else class="flex justify-center" style="width: 100%">
                 <q-spinner
                 color="primary"

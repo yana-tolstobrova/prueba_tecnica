@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('dogs', function (Blueprint $table) {
             $table->id();
             $table->string('photo', 255);
-            $table->string('breed', 255);
-            $table->string('color', 255);
-            $table->string('size', 255);
+            $table->string('breed', 100);
+            $table->string('color', 100);
+            $table->string('size', 50);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

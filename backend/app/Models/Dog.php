@@ -12,6 +12,7 @@ class Dog extends Model
         'photo',
         'breed',
         'color',
-        'size'
+        'size',
+        'description'
     ];
 }

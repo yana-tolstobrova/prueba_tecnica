@@ -28,9 +28,10 @@ class DogController extends Controller
     {
         $data = $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            'breed' => 'required',
-            'size' => 'required',
-            'color' => 'required',
+            'breed' => 'required|string|max:100',
+            'color' => 'required|string|max:100',
+            'size' => 'required|string|max:50',
+            'description' => 'nullable|string',
         ]);
 
         try {
@@ -81,10 +82,11 @@ class DogController extends Controller
         try {
             $data = $request->validate([
                 'photo' => $request->hasFile('photo') ? 'image|mimes:jpeg,png,jpg,svg|max:2048' : 'required',
-                'breed' => 'required',
-                'size' => 'required',
-                'color' => 'required',
-            ]);
+                'breed' => 'required|string|max:100',
+                'color' => 'required|string|max:100',
+                'size' => 'required|string|max:50',
+                'description' => 'nullable|string',
+           ]);
 
             if ($request->hasFile('photo')) {
                 $imageFile = $request->file('photo');
@@ -139,6 +141,10 @@ class DogController extends Controller
     {
         $searchTerm = strtolower($request->input('search_term'));
 
+        $request->validate([
+            'search_term' => 'required|string|max:255',
+        ]);
+        
         $dogs = Dog::where(function ($query) use ($searchTerm) {
             $query->whereRaw('LOWER(breed) LIKE ?', ["%$searchTerm%"])
                 ->orWhereRaw('LOWER(size) LIKE ?', ["%$searchTerm%"])

@@ -9,6 +9,14 @@ const routes = [
       { path: '/edit/:id', component: () => import('pages/EditDog.vue') }
     ]
   },
+  ,
+  {
+    path: "/companies",
+    component: () => import('layouts/CompaniesLayout.vue'),
+    children: [
+      { path: '/companies', component: () => import('pages/CompaniesPage.vue') }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

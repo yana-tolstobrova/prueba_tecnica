@@ -51,11 +51,13 @@ export default defineComponent({
             @click="navigateToDogDetails(dog.id)"
           />
         </template>
-        <div v-else>
-          De momento no hay perros :(
+        <div v-else class="flex justify-center" style="width: 100%">
+          <q-spinner
+          color="primary"
+          size="3em"
+        />
         </div>
       </div>
-
     </ContentWrapper>
   </q-page>
 </template>

@@ -64,9 +64,12 @@ export default defineComponent({
                 </div>
                 </div>
             </div>
-              <div v-else>
-                No se encontró el perro.
-              </div>
+            <div v-else class="flex justify-center" style="width: 100%">
+                <q-spinner
+                color="primary"
+                size="3em"
+                />
+            </div>
     </ContentWrapper>
   </q-page>
 </template>

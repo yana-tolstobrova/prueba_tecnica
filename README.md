@@ -14,7 +14,7 @@ Sigue estos pasos para poner en marcha el proyecto en tu máquina local.
 
 ```bash
 # 1. Clonar el Repositorio
-git clone https://github.com/BDI-PROJECT/backend-ferchau.git
+git clone https://github.com/yana-tolstobrova/prueba_tecnica.git
 
 ## Instalación de la parte Backend
 

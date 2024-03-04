@@ -48,3 +48,5 @@ npm install
 
 # 12. Iniciar Servidor de Desarrollo del Frontend
 npm run dev 
+
+Maquetación de la página 'companies' está en la ruta '/companies'. Está en progreso.

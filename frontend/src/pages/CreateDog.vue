@@ -4,11 +4,23 @@
       <form @submit.prevent="submit" style="width:50%; margin: 0 auto;">
         <q-card>
           <q-card-section>
-            <h4>Crear nuevo perro</h4>
-            <input type="file" accept="image/*" @change="handleFileUpload" />
-            <q-input v-model="dog.breed" label="Breed" />
-            <q-input v-model="dog.size" label="Size" />
-            <q-input v-model="dog.color" label="Color" />
+            <p class="text-h5">Crear nuevo perro</p>
+            <q-input v-model="dog.breed" label="Raza" />
+            <div class="flex justify-between">
+            <q-file color="grey-3" style="width: 48%; margin-top: 1em" outlined label-color="orange" v-model="dog.photo" @change="handleFileUpload" label="Seleccionar foto">
+              <template v-slot:append>
+                <q-icon name="attachment" color="orange" />
+              </template>
+            </q-file>
+            <q-input v-model="dog.color" label="Color de pelo" style="width: 48%; margin-top: 1em"/>
+            </div>
+                <div class="q-gutter-md flex items-center q-pt-md">
+                  <span style="font-size:1.2em; color: grey">Tamaño</span>
+                  <q-radio v-model="dog.size" val="Pequeño" label="Pequeño" color="orange" />
+                  <q-radio v-model="dog.size" val="Mediano" label="Mediano" color="orange" />
+                  <q-radio v-model="dog.size" val="Grande" label="Grande" color="orange" />
+                </div>
+            <q-input v-model="dog.description" autogrow label="Descripción"/>
           </q-card-section>
           <q-card-actions align="right">
             <q-btn label="Cancelar" to="/" type="reset" />
@@ -36,7 +48,8 @@ export default defineComponent({
       photo: '',
       breed: '',
       size: '',
-      color: ''
+      color: '',
+      description: ''
     })
 
     const handleFileUpload = (event) => {
@@ -49,6 +62,7 @@ export default defineComponent({
       formData.append('breed', dog.breed)
       formData.append('size', dog.size)
       formData.append('color', dog.color)
+      formData.append('description', dog.description)
 
       axios.post('http://localhost:8000/api/dogs', formData)
         .then(response => {

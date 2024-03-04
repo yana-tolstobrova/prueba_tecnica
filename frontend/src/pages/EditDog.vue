@@ -46,7 +46,6 @@ export default defineComponent({
           dog.breed = fetchedDog.breed
           dog.size = fetchedDog.size
           dog.color = fetchedDog.color
-          // Assuming that fetchedDog.photo is the URL of the photo
           dog.photo = fetchedDog.photo
           console.log(dog.photo)
         })
@@ -77,7 +76,7 @@ export default defineComponent({
     }
 
     const cancelEdit = () => {
-      router.back() // Go back to previous page
+      router.back()
     }
 
     onMounted(fetchDog)

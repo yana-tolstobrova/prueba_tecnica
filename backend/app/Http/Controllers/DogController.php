@@ -134,5 +134,18 @@ class DogController extends Controller
             ], 500);
         }
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = strtolower($request->input('search_term'));
+
+        $dogs = Dog::where(function ($query) use ($searchTerm) {
+            $query->whereRaw('LOWER(breed) LIKE ?', ["%$searchTerm%"])
+                ->orWhereRaw('LOWER(size) LIKE ?', ["%$searchTerm%"])
+                ->orWhereRaw('LOWER(color) LIKE ?', ["%$searchTerm%"]);
+        })->get();
+
+        return response()->json($dogs);
+    }
 }
 

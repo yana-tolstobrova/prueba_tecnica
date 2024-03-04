@@ -20,4 +20,4 @@ use App\Http\Controllers\DogController;
 });*/
 
 Route::resource('dogs', DogController::class);
-
+Route::get('/search', [DogController::class, 'search']);

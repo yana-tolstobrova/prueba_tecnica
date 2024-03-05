@@ -72,15 +72,28 @@
             <span class="text-h5 q-mr-md" style="color: white">Find more about our basic and personalized hiring solutions</span>
             <q-btn class="q-px-xl text-weight-bold" elevated size="16px" rounded color="white" text-color="#0C3866" label="Learn more" />
         </div>
+        <div class="q-px-xl">
+            <h5 class="text-center" style="color: #0C3866"><strong>Tell us about</strong> your needs!</h5>
+            <ContactForm />
+        </div>
+        <h5 class="text-center" style="color: #0C3866"><strong>ATS Partners & API Solutions</strong></h5>
+        <CarouselPartners/>
+        <div style="background-color:#007CC0; padding: 3em;">
+            <p class="text-h4 text-center" style="color: white">Together, your hires, our goal!</p>
+        </div>
       </div>
       </section>
 </template>
 
 <script>
 import CarouselCompanies from 'src/components/CarouselCompanies.vue';
+import CarouselPartners from 'src/components/CarouselPartners.vue';
+import ContactForm from 'src/components/ContactForm.vue';
 export default {
     components: {
-        CarouselCompanies
+        CarouselCompanies,
+        CarouselPartners,
+        ContactForm
     }
 }
 </script>

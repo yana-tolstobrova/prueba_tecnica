@@ -1,6 +1,11 @@
 ## Getting Started
 
-Sigue estos pasos para poner en marcha el proyecto en tu máquina local.
+Para comenzar, ejecuta sh init.sh en el directorio raíz.
+
+SPA clasificador de perros: http://localhost:8080
+Cópia de la pagina Companies: http://localhost:8080/companies
+
+O sigue estos pasos para poner en marcha el proyecto en tu máquina local.
 
 ### Prerequisites
 
@@ -48,5 +53,3 @@ npm install
 
 # 12. Iniciar Servidor de Desarrollo del Frontend
 npm run dev 
-
-Maquetación de la página 'companies' está en la ruta '/companies'. Está en progreso.

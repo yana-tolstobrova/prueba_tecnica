@@ -10,8 +10,7 @@ echo ${C}  "Docker containers launched."${N}
 echo ${C} "Waiting for database container to initialize."${N}
 sleep 30
 echo ${C}  "Building app inside containers."${N}
-docker exec -it backend php artisan optimize
-docker exec -it backend php artisan migrate:fresh
+docker exec -it backend php artisan migrate
 docker exec -it backend php artisan db:seed
 cd ../frontend
 docker-compose up -d

@@ -1,6 +1,6 @@
 ## Getting Started
 
-Para comenzar, ejecuta sh init.sh en el directorio raíz.
+Para comenzar, tienes que renombrar .env.example a .env y ejecutar sh init.sh en el directorio raíz.
 
 SPA clasificador de perros: http://localhost:8080
 Cópia de la pagina Companies: http://localhost:8080/companies

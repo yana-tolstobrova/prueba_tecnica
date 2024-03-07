@@ -1,17 +1,29 @@
 FROM php:8.2-fpm
-ARG user
-ARG uid
-RUN apt update && apt install -y \
-    git \
-    curl \
+COPY composer*.json /var/www/
+
+WORKDIR /var/www/
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libzip-dev \
     libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
     libonig-dev \
-    libxml2-dev
-RUN apt clean && rm -rf /var/lib/apt/lists/*
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    git \
+    curl
+
+RUN docker-php-ext-install pdo_mysql zip exif pcntl
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install gd
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-WORKDIR /var/www
-USER $user
+
+RUN composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
+
+COPY . /var/www/
+

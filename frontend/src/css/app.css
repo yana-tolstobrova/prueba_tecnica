@@ -1,1 +1,14 @@
 /* app global css */
+a:hover{
+    color: #007CC0;
+    cursor: pointer
+}
+li{
+    list-style-type: none;
+    list-style-position: outside;
+    padding: 0.5em 0em;
+}
+
+ul{
+    padding-left: 0;
+}

@@ -8,7 +8,7 @@
         arrows
         transition-prev="slide-right"
         transition-next="slide-left"
-        style="background:transparent; height:160px"
+        style="background:transparent; height:200px"
         >
         <q-carousel-slide :name="1" class="column no-wrap">
         <div class="row fit justify-around items-center q-gutter-xs q-col-gutter no-wrap" style="height:80px">

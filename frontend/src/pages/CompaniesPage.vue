@@ -76,11 +76,12 @@
             <h5 class="text-center" style="color: #0C3866"><strong>Tell us about</strong> your needs!</h5>
             <ContactForm />
         </div>
-        <h5 class="text-center" style="color: #0C3866"><strong>ATS Partners & API Solutions</strong></h5>
+        <h5 class="text-center q-pt-xl" style="color: #0C3866"><strong>ATS Partners & API Solutions</strong></h5>
         <CarouselPartners/>
         <div style="background-color:#007CC0; padding: 3em;">
-            <p class="text-h4 text-center" style="color: white">Together, your hires, our goal!</p>
+        <p class="text-h4 text-center" style="color: white">Together, your hires, our goal!</p>
         </div>
+        <FooterCompanies />
       </div>
       </section>
 </template>
@@ -89,11 +90,14 @@
 import CarouselCompanies from 'src/components/CarouselCompanies.vue';
 import CarouselPartners from 'src/components/CarouselPartners.vue';
 import ContactForm from 'src/components/ContactForm.vue';
+import FooterCompanies from 'src/components/FooterCompanies.vue';
+
 export default {
     components: {
         CarouselCompanies,
         CarouselPartners,
-        ContactForm
+        ContactForm,
+        FooterCompanies
     }
 }
 </script>

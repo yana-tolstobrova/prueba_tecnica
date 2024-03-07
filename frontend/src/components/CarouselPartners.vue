@@ -12,7 +12,7 @@
         >
         <q-carousel-slide :name="1" class="column no-wrap">
         <div class="row fit justify-around items-center q-gutter-xs q-col-gutter no-wrap" style="height:80px">
-            <q-img class="col-2" src="https://www.europelanguagejobs.com/statics/images/broadbean.svg" />
+            <q-img class="col-2" style="width:10em" src="https://www.europelanguagejobs.com/statics/images/broadbean.svg" />
             <q-img class="col-2" src="https://www.europelanguagejobs.com/statics/images/hrlink.svg" />
             <q-img class="col-3" src="https://www.europelanguagejobs.com/statics/images/logicmelon.svg"/>
         </div>
